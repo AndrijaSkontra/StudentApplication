@@ -1,7 +1,7 @@
 # Student Application
 
 ## Pre-requisites
-- ==TODO==
+- **TODO**
 
-**To run application follow the steps below**
-- ==TODO== 
+## To run application follow the steps below
+- **TODO** 
