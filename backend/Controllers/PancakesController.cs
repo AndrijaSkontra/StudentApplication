@@ -171,10 +171,51 @@ public class PancakesController : ControllerBase
     }
 
     [HttpPost]
-    [Route("Order123132")]
-    public async Task<ActionResult> doesntmatter(List<int> nums)
+    [Route("CreatePancake")]
+    public async Task<ActionResult<GetPancakeDto>> CreatePancake(List<int> nums)
     {
-        return null;
+        var pancake = new Pancake()
+        {
+            Ingredients = await _context.Ingredients.Where(i => nums.Contains(i.Id)).ToListAsync()
+        };
+        
+        if (pancake.Ingredients.Count < 1)
+        {
+            return BadRequest("You must select at least one ingredient!");
+        }
+
+        var baseIngredients = pancake.Ingredients.Count(i => i.IngredientType == IngredientType.Base);
+        if (baseIngredients != 1)
+        {
+            return BadRequest("You need to have exactly one base ingredient!");
+        }
+        
+        var stuffingIngredients = pancake.Ingredients.Count(i => i.IngredientType == IngredientType.Stuffing);
+        if (stuffingIngredients < 1)
+        {
+            return BadRequest("You need to have at least one stuffing ingredient!");
+        }
+        
+        pancake.Price = pancake.Ingredients.Sum(i => i.Price);
+        
+        _context.Pancake.Add(pancake);
+        await _context.SaveChangesAsync();
+        
+        var pancakeDto = new GetPancakeDto()
+        {
+            Id = pancake.Id,
+            Ingredients = pancake.Ingredients.Select(i => new IngredientForPancakeDto()
+            {
+                Id = i.Id,
+                IngredientType = i.IngredientType,
+                IsHealthy = i.IsHealthy,
+                Name = i.Name,
+                Price = i.Price
+            }).ToList(),
+            Price = pancake.Price
+        };
+        
+        return pancakeDto;
     }
 
     // DELETE: api/Pancakes/5
