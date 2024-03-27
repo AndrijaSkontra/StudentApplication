@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Pancake} from "./models/Pancake";
+import {Pancake} from "../models/Pancake";
 
 @Injectable({
   providedIn: 'root'

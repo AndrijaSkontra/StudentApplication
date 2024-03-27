@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {PancakeTableComponent} from "./pancake-table/pancake-table.component";
+import {IngredientsTableComponent} from "./ingredients-table/ingredients-table.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PancakeTableComponent],
+  imports: [RouterOutlet, PancakeTableComponent, IngredientsTableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

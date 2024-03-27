@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PancakeService} from "../pancake.service";
+import {PancakeService} from "../services/pancake.service";
 import {Pancake} from "../models/Pancake";
 import {DecimalPipe, NgForOf} from "@angular/common";
 import {IngredientType} from "../models/IngredientType";

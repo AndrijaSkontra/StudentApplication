@@ -505,3 +505,4 @@
 /home/skhoki/dev/StudentApplication/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /home/skhoki/dev/StudentApplication/backend/obj/Debug/net8.0/ref/backend.dll
 /home/skhoki/dev/StudentApplication/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/home/shkoki/dev/StudentApp/backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
