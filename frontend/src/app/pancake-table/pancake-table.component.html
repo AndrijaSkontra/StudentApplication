@@ -1,0 +1,26 @@
+<div class="grid-container">
+  <div class="grid-item-order-table">
+    <h2 id="order-label">Order:</h2>
+    <div class="table">
+      <table>
+        <tr>
+          <th>Ingredients</th>
+          <th>Price</th>
+          <th>ID</th>
+        </tr>
+        <tr *ngFor="let pancake of pancakes">
+          <td>
+            <p *ngFor="let ingredient of pancake.ingredients">{{pancake.ingredients.indexOf(ingredient) + 1}}. {{ ingredient.name }}
+              - {{ getIngredientType(ingredient.ingredientType) }}</p>
+          </td>
+          <td>{{ pancake.price | number }}</td>
+          <td>{{ pancake.id }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-item-buttons">
+    <button class="button-19" role="button" (click)="hidePancakes()">Hide</button>
+  </div>
+</div>
