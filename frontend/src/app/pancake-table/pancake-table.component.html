@@ -1,28 +1,23 @@
-<div class="order-container">
-  <div class="order-header">
-    <h2>Order:</h2>
-    <div class="order-table">
-      <table>
-        <tr>
-          <th>Ingredients</th>
-          <th>Price</th>
-          <th>ID</th>
-        </tr>
-        <tr *ngFor="let pancake of pancakes" class="pancake-row">
-          <td>
-            <p *ngFor="let ingredient of pancake.ingredients" class="ingredient">{{pancake.ingredients.indexOf(ingredient) + 1}}. {{ ingredient.name }}
-              - {{ getIngredientType(ingredient.ingredientType) }}</p>
-          </td>
-          <td class="price">{{ pancake.price | number }}</td>
-          <td class="id">{{ pancake.id }}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Price</th>
+    <th scope="col">Ingredients</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pancake of pancakes">
+    <th scope="row">{{ pancake.id }}</th>
+    <td>{{ pancake.price |  number }}</td>
+    <td>
+      <span *ngFor="let ingredient of pancake.ingredients"> {{ ingredient.name }}
+        - {{ getIngredientType(ingredient.ingredientType) }};</span>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
-  <div class="button-container">
-    <button (click)="hidePancakes()" class="hide-button">Hide</button>
-  </div>
-</div>
+<button type="button" class="btn btn-outline-primary" (click)="hidePancakes()">Hide</button>
 
 
