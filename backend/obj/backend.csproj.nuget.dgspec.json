@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/shkoki/dev/StudentApp/backend/backend.csproj": {}
+    "/home/skhoki/dev/StudentApplication/backend/backend.csproj": {}
   },
   "projects": {
-    "/home/shkoki/dev/StudentApp/backend/backend.csproj": {
+    "/home/skhoki/dev/StudentApplication/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/shkoki/dev/StudentApp/backend/backend.csproj",
+        "projectUniqueName": "/home/skhoki/dev/StudentApplication/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/home/shkoki/dev/StudentApp/backend/backend.csproj",
-        "packagesPath": "/home/shkoki/.nuget/packages/",
-        "outputPath": "/home/shkoki/dev/StudentApp/backend/obj/",
+        "projectPath": "/home/skhoki/dev/StudentApplication/backend/backend.csproj",
+        "packagesPath": "/home/skhoki/.nuget/packages/",
+        "outputPath": "/home/skhoki/dev/StudentApplication/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/shkoki/.nuget/NuGet/NuGet.Config"
+          "/home/skhoki/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -86,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,27 +1,37 @@
-<div class="order-container">
-  <div class="order-header">
-    <h2>Order:</h2>
-    <div class="order-table">
-      <table>
-        <tr>
-          <th>Ingredients</th>
-          <th>Price</th>
-          <th>ID</th>
-        </tr>
-        <tr class="pancake-row">
-          <td>
-            <p class="ingredient"></p>
-          </td>
-          <td class="price"></td>
-          <td class="id"></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="button-container">
-    <button class="hide-button">Hide</button>
-  </div>
+<div class="main-buttons">
+  <button type="button" class="btn btn-outline-primary" (click)="goToIngredientAdd()">+ Add Ingredient</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="hideIngredients()">Hide</button>
 </div>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Type</th>
+    <th scope="col">Price</th>
+    <th scope="col">Healthy</th>
+    <th style="text-align: center">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ingredient of ingredients">
+    <th scope="row">{{ ingredient.id }}</th>
+    <td>{{ ingredient.name }}</td>
+    <td>{{ getIngredientType(ingredient.ingredientType) }}</td>
+    <td>{{ ingredient.price | number }} €</td>
+    <td>
+      <div *ngIf="ingredient.isHealthy else elseBlock">&nbsp; ✅</div>
+      <ng-template #elseBlock>&nbsp;&nbsp;&nbsp; ❌</ng-template>
+    </td>
+    <td>
+      <div class="table-buttons">
+        <button type="button" class="btn btn-outline-primary">Edit</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 

@@ -1,2 +1,13 @@
-@import "../pancake-table/pancake-table.component.scss";
+.main-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 

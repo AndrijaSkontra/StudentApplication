@@ -1,0 +1,56 @@
+<form [formGroup]="addIngredientForm" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      <input type="Name" class="form-control" id="inputName3" placeholder="Name" formControlName="name">
+      <div *ngIf="addIngredientForm.get('name')?.invalid && addIngredientForm.get('name')?.touched">
+        <small *ngIf="addIngredientForm.get('name')?.errors" class="text-danger">Name is required</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputprice3" class="col-sm-2 col-form-label">Price</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="inputprice3" placeholder="e.g. 5.32" formControlName="price">
+      <div *ngIf="addIngredientForm.get('price')?.invalid && addIngredientForm.get('price')?.touched">
+        <small *ngIf="addIngredientForm.get('price')?.errors" class="text-danger">Not valid price</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="select" class="col-sm-2 col-form-label">Type</label>
+    <div class="col-sm-10">
+      <select class="form-control" id="select" formControlName="ingredientType">
+        <option value="0">Base</option>
+        <option value="1">Stuffing</option>
+        <option value="2">Dressing</option>
+        <option value="3">Fruit</option>
+      </select>
+    </div>
+  </div>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Is this ingredient healthy?</legend>
+      <div class="col-sm-10">
+        <div class="form-check" >
+          <input class="form-check-input" type="radio" id="gridRadios1" value="true" checked formControlName="isHealthy">
+          <label class="form-check-label" for="gridRadios1">
+            Yes
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="gridRadios2" value="false" formControlName="isHealthy">
+          <label class="form-check-label" for="gridRadios2">
+            No
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button [disabled]="addIngredientForm.invalid" type="submit" class="btn btn-primary">Add ingredient</button>
+    </div>
+  </div>
+</form>
