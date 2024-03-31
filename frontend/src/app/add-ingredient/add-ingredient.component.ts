@@ -51,6 +51,8 @@ export class AddIngredientComponent implements OnInit{
       }
 
       this.service.addIngredient(this.ingredient);
+
+      this.addIngredientForm.reset();
     }
   }
 }

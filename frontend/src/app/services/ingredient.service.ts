@@ -16,7 +16,10 @@ export class IngredientService {
   }
 
   addIngredient(ingredient: CreateIngredientDto) {
-    console.log("Adding ingredient 123");
     this.http.post<Ingredient>('http://localhost:5013/api/Ingredients', ingredient).subscribe();
+  }
+
+  deleteIngredient(id: number) {
+    return this.http.delete(`http://localhost:5013/api/Ingredients/${id}`);
   }
 }
