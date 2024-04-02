@@ -1,6 +1,6 @@
-namespace backend.ViewModel;
+namespace backend.ViewModel.OrderDTO;
 
-public class Order
+public class GetSingleOrderDto
 {
     public int Id { get; set; }
     
@@ -10,7 +10,7 @@ public class Order
     
     public DateTime Time { get; set; }
     
-    public List<Pancake> Pancakes { get; set; }
+    public List<PancakeForSingleOrderDto> Pancakes { get; set; }
 
     public float Discount { get; set; } = 0;
 }

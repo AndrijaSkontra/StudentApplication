@@ -49,22 +49,29 @@ public class IngredientsController : ControllerBase
     public async Task<ActionResult<Ingredient>> GetIngredient(int id)
     {
         var ingredient = await _context.Ingredients.FindAsync(id);
+    
+        if (ingredient == null)
+        {
+            return NotFound();
+        }
+    
+        return ingredient;
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutIngredient(int id, CreateIngredientDto ingredientDto)
+    {
+        var ingredient = await _context.Ingredients.FindAsync(id);
 
         if (ingredient == null)
         {
             return NotFound();
         }
 
-        return ingredient;
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutIngredient(int id, Ingredient ingredient)
-    {
-        if (id != ingredient.Id)
-        {
-            return BadRequest();
-        }
+        ingredient.Name = ingredientDto.Name;
+        ingredient.Price = ingredientDto.Price;
+        ingredient.IsHealthy = ingredientDto.IsHealthy;
+        ingredient.IngredientType = ingredientDto.IngredientType;
 
         _context.Entry(ingredient).State = EntityState.Modified;
 
@@ -83,7 +90,6 @@ public class IngredientsController : ControllerBase
                 throw;
             }
         }
-
         return NoContent();
     }
 

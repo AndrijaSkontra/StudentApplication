@@ -23,7 +23,6 @@ namespace backend.Controllers
             _context = context;
         }
 
-        // GET: api/Orders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetOrderDto>>> GetOrder()
         {
@@ -46,20 +45,32 @@ namespace backend.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<GetSingleOrderDto>> GetOrder(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Order.Include(o => o.Pancakes).FirstAsync(o => o.Id == id);
 
             if (order == null)
             {
                 return NotFound();
             }
+            
+            var orderDTO = new GetSingleOrderDto()
+            {
+                Id = order.Id,
+                Desc = order.Desc,
+                Price = order.Price,
+                Time = order.Time,
+                Discount = order.Discount,
+                Pancakes = order.Pancakes.Select(p => new PancakeForSingleOrderDto()
+                {
+                    Id = p.Id,
+                    Price = p.Price,
+                }).ToList()
+            };
 
-            return order;
+            return orderDTO;
         }
-
-        // PUT: api/Orders/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {
@@ -89,8 +100,6 @@ namespace backend.Controllers
             return NoContent();
         }
 
-        // POST: api/Orders
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Order>> PostOrder(CreateOrderDto orderDto)
         {
@@ -107,6 +116,23 @@ namespace backend.Controllers
                 Pancakes = await _context.Pancake.Where(p => orderDto.PancakesId.Contains(p.Id)).ToListAsync(),
             };
             order.Price = order.Pancakes.Sum(p => p.Price);
+            if (order.Price > 100)
+            {
+                order.Discount = order.Price * 0.05f;
+            }
+            else if (order.Price > 200)
+            {
+                order.Discount = order.Price * 0.1f;
+            }
+            
+            var pancakeDiscount = order.Pancakes.Sum(p => p.Discount);
+
+            if (pancakeDiscount > order.Discount)
+            {
+                Console.WriteLine($"\nPancake discount {pancakeDiscount} is higher than order discount {order.Discount}\n");
+                order.Discount = pancakeDiscount;
+                Console.WriteLine($"\nOrder discount is now {order.Discount}\n");
+            }
             
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
@@ -114,7 +140,6 @@ namespace backend.Controllers
             return CreatedAtAction("GetOrder", new { id = order.Id }, orderDto);
         }
 
-        // DELETE: api/Orders/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder(int id)
         {

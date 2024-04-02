@@ -12,4 +12,6 @@ public class Pancake
     public Order? Order { get; set; }
     
     public int? OrderId { get; set; }
+
+    public float Discount { get; set; } = 0;
 }

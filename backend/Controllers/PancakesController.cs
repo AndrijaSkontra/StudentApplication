@@ -32,6 +32,7 @@ public class PancakesController : ControllerBase
         {
             Id = p.Id,
             Price = p.Price,
+            Discount = p.Discount,
             Ingredients = p.Ingredients.Select(i => new IngredientForPancakeDto()
             {
                 Id = i.Id,
@@ -47,7 +48,7 @@ public class PancakesController : ControllerBase
 
     // GET: api/Pancakes/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Pancake>> GetPancake(int id)
+    public async Task<ActionResult<GetPancakeDto>> GetPancake(int id)
     {
         var pancake = await _context.Pancake.FindAsync(id);
 
@@ -55,8 +56,23 @@ public class PancakesController : ControllerBase
         {
             return NotFound();
         }
+        
+        var pancakeDto = new GetPancakeDto()
+        {
+            Id = pancake.Id,
+            Ingredients = pancake.Ingredients.Select(i => new IngredientForPancakeDto()
+            {
+                Id = i.Id,
+                IngredientType = i.IngredientType,
+                IsHealthy = i.IsHealthy,
+                Name = i.Name,
+                Price = i.Price
+            }).ToList(),
+            Price = pancake.Price,
+            Discount = pancake.Discount
+        };
 
-        return pancake;
+        return pancakeDto;
     }
 
     // PUT: api/Pancakes/5
@@ -197,6 +213,13 @@ public class PancakesController : ControllerBase
         }
         
         pancake.Price = pancake.Ingredients.Sum(i => i.Price);
+        
+        var healthyIngredients = pancake.Ingredients.Count(i => i.IsHealthy);
+
+        if (healthyIngredients > pancake.Ingredients.Count * 0.75)
+        {
+            pancake.Discount = pancake.Price * 0.15f;
+        }
         
         _context.Pancake.Add(pancake);
         await _context.SaveChangesAsync();
