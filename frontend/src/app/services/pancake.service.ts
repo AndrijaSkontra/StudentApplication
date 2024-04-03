@@ -13,4 +13,8 @@ export class PancakeService {
   public getPancakes(): Observable<Pancake[]> {
     return this.http.get<Pancake[]>('http://localhost:5013/api/Pancakes');
   }
+
+  deletePancake(id: number) {
+    this.http.delete(`http://localhost:5013/api/Pancakes/${id}`).subscribe();
+  }
 }

@@ -1,3 +1,8 @@
+<div class="main-buttons">
+  <button type="button" class="btn btn-outline-primary" (click)="goToPancakesAdd()">+ Add Pancake</button>
+  <button type="button" class="btn btn-outline-secondary" (click)="hidePancakes()">Hide</button>
+</div>
+
 <table class="table table-striped">
   <thead>
   <tr>
@@ -14,10 +19,15 @@
       <span *ngFor="let ingredient of pancake.ingredients"> {{ ingredient.name }}
         - {{ getIngredientType(ingredient.ingredientType) }};</span>
     </td>
+    <td>
+      <div class="table-buttons">
+        <button type="button" class="btn btn-outline-primary">Edit</button>
+        <button type="button" class="btn btn-outline-danger" (click)="deletePancake(pancake.id)">Delete</button>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>
 
-<button type="button" class="btn btn-outline-primary" (click)="hidePancakes()">Hide</button>
 
 

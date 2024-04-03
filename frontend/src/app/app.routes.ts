@@ -2,10 +2,12 @@ import { Routes } from '@angular/router';
 import {IngredientsTableComponent} from "./ingredients-table/ingredients-table.component";
 import {PancakeTableComponent} from "./pancake-table/pancake-table.component";
 import {AddIngredientComponent} from "./add-ingredient/add-ingredient.component";
+import {AddPancakeComponent} from "./add-pancake/add-pancake.component";
 
 export const routes: Routes = [
   {path: "ingredients", component: IngredientsTableComponent},
   {path: "", pathMatch: "full", redirectTo: "pancakes"},
   {path: "pancakes", component: PancakeTableComponent},
-  {path: "addIngredient", component: AddIngredientComponent}
+  {path: "addIngredient", component: AddIngredientComponent},
+  {path: "addPancake", component: AddPancakeComponent}
 ];
